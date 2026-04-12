@@ -12,6 +12,17 @@ CREATE TABLE TinTuc (
     img_position ENUM('left', 'right', 'none') DEFAULT 'none',
     author VARCHAR(100)
 );
+CREATE TABLE IF NOT EXISTS TaiKhoan (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    uname VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE
+);
+INSERT INTO TaiKhoan (uname, password, email) VALUES 
+('admin_tong', '123456', 'admin@news.vn'),
+('hainam_kd', 'matkhau123', 'hainam@news.vn'),
+('minhtu_cn', 'tu123456', 'minhtu@news.vn'),
+('linhdan_dl', 'pass123', 'linhdan@news.vn');
 INSERT INTO TinTuc (category, publish_date, title, summary, image_url, img_position, author) VALUES 
 ('KINH DOANH', '2026-04-10', 'Giá vàng trong nước tăng vọt, vượt ngưỡng 90 triệu đồng', 'Ảnh hưởng từ thị trường thế giới khiến giá vàng miếng SJC sáng nay tăng mạnh...', '/images/gold.jpg', 'left', 'Hải Nam'),
 ('CÔNG NGHỆ', '2026-04-09', 'Việt Nam bắt đầu thử nghiệm mạng 6G tại các thành phố lớn', 'Bộ Thông tin và Truyền thông vừa cấp phép thử nghiệm hạ tầng mạng thế hệ mới...', '/images/tech6g.jpg', 'right', 'Minh Tú'),
