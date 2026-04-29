@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Head Start -->
+  <%- include('../partials/head-css-font') %>
+  <!-- Head End -->
+  <body>
+    <!-- Topbar Start -->
+    <%- include('../partials/top-bar') %>
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <%- include('../partials/nav-bar') %>
+    <!-- Navbar End -->
+    <!-- Main Start -->
+    <%- include(url === '/' ? '../pages/home' : `../pages/${url}`,{moiNhat: moiNhat,
+      xemNhieuNhat: xemNhieuNhat,
+      tatCa: tatCa,
+      tinNong: tinNong,
+      thinhHanh: thinhHanh,
+      danhMuc: danhMuc,
+      lienHe: lienHe,
+      chiTietTin:chiTietTin,
+      categoryId: typeof categoryId !== 'undefined' ? categoryId : null}) 
+    %>
+    <!-- Main End -->
+    <!-- Footer Start -->
+    <%- include('../partials/footer',{thinhHanh: thinhHanh,
+      danhMuc: danhMuc,
+      lienHe: lienHe,
+      danhMuc: danhMuc,}) %>
+    <!-- Footer End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-square back-to-top"
+      ><i class="fa fa-arrow-up"></i
+    ></a>
+    <!-- JavaScript Libraries Start-->
+    <%- include('../partials/scripts') %>
+    <!-- JavaScript Libraries End-->
+    <%- include('../partials/contact-popup') %>
+  </body>
+</html>

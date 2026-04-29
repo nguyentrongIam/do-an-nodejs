@@ -1,0 +1,43 @@
+<div class="container-fluid pt-5 mb-3">
+  <div class="container">
+    <!--Bắt đầu tiêu đề-->
+    <div class="section-title">
+      <h4 class="m-0 text-uppercase font-weight-bold">
+        Xem nhiều nhất
+      </h4>
+    </div>
+    <!--Kết thúc tiêu đề-->
+    <!--Bắt đầu slider-->
+    <div class="owl-carousel news-carousel carousel-item-4 position-relative">
+      <!--Bắt đầu thẻ tin tức-->
+      <% if (xemNhieuNhat && xemNhieuNhat.length > 0) { %>
+      <% xemNhieuNhat.forEach(function(news) { %>
+      <div class="position-relative overflow-hidden" style="height: 300px">
+        <img
+          class="img-fluid h-100"
+          src="<%= news.link_hinh_anh %>"
+          style="object-fit: cover"
+        />
+        <div class="overlay">
+          <div class="mb-2">
+            <a
+              class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+              href="category/<%= news.id_danh_muc %>"
+              ><%= news.ten_danh_muc %></a
+            >
+            <a class="text-white" href=""><small><%= news.ngay_dang %></small></a>
+          </div>
+          <a
+            class="h6 m-0 text-white text-uppercase font-weight-semi-bold"
+            href="/single/<%= news.id %>"
+            ><%= news.tieu_de %></a
+          >
+        </div>
+      </div>
+      <% }); %>
+      <% } %>
+      <!--Kết thúc thẻ tin tức-->
+    </div>
+    <!--Kết thúc slider-->
+  </div>
+</div>

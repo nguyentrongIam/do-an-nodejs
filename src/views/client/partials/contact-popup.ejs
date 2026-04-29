@@ -1,0 +1,134 @@
+<button
+  type="button"
+  class="btn btn-warning position-fixed shadow-lg border-0"
+  style="
+    bottom: 90px;
+    right: 30px;
+    z-index: 9999;
+    border-radius: 50px;
+    padding: 10px 25px;
+    outline: none;
+  "
+  data-toggle="modal"
+  data-target="#contactModal"
+>
+  <i class="fas fa-envelope mr-2"></i>Liên hệ ngay
+</button>
+
+<div
+  class="modal fade"
+  id="contactModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="contactModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body pt-0 px-4 pb-4">
+        <div class="row">
+          <div class="col-md-5 mb-4 mb-md-0">
+            <h5 class="font-weight-bold mb-4 text-uppercase">
+              THÔNG TIN LIÊN HỆ
+            </h5>
+
+            <div class="mb-3">
+              <h6 class="font-weight-bold mb-1" style="color: #ffc107">
+                <i class="fas fa-map-marker-alt mr-2"></i>Địa chỉ văn phòng
+              </h6>
+              <p class="text-muted m-0">
+                60A Hoàng Văn Thụ, P.9, Q.Phú Nhuận, TP.HCM
+              </p>
+            </div>
+
+            <div class="mb-3">
+              <h6 class="font-weight-bold mb-1" style="color: #ffc107">
+                <i class="fas fa-envelope mr-2"></i>Địa chỉ email
+              </h6>
+              <p class="text-muted m-0">toasoan@tuoitre.com.vn</p>
+            </div>
+
+            <div class="mb-3">
+              <h6 class="font-weight-bold mb-1" style="color: #ffc107">
+                <i class="fas fa-phone-alt mr-2"></i>Số điện thoại
+              </h6>
+              <p class="text-muted m-0">0909.123.456</p>
+            </div>
+          </div>
+
+          <div class="col-md-7">
+            <h5 class="font-weight-bold mb-4 text-uppercase">
+              LIÊN HỆ VỚI CHÚNG TÔI
+            </h5>
+            <form action="/submit-contact" method="POST">
+              <div class="form-row">
+                <div class="col-md-6 form-group">
+                  <input
+                    type="text"
+                    name="ten"
+                    class="form-control rounded-0"
+                    placeholder="Tên"
+                    required
+                  />
+                </div>
+                <div class="col-md-6 form-group">
+                  <input
+                    type="email"
+                    name="email"
+                    class="form-control rounded-0"
+                    placeholder="Email"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="so_dien_thoai"
+                  class="form-control rounded-0"
+                  placeholder="Số điện thoại"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="tieu_de"
+                  class="form-control rounded-0"
+                  placeholder="Tiêu đề"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <textarea
+                  name="noi_dung"
+                  class="form-control rounded-0"
+                  rows="4"
+                  placeholder="Nội dung"
+                  required
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-warning text-dark font-weight-bold px-4 rounded-0"
+              >
+                Gửi
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

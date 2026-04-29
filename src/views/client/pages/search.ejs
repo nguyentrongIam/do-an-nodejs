@@ -1,0 +1,103 @@
+<div class="container-fluid mt-5 pt-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        
+        <div class="section-title mb-4">
+          <h4 class="m-0 text-uppercase font-weight-bold">
+            Kết quả tìm kiếm cho: "<span class="text-primary"><%= keyword %></span>"
+          </h4>
+        </div>
+        <div class="mb-4 bg-white border p-3">
+          <p class="m-0 font-weight-semi-bold">
+            <i class="fas fa-search text-primary mr-2"></i>Tìm thấy <strong class="text-danger"><%= totalRows %></strong> bài viết phù hợp.
+          </p>
+        </div>
+
+        <div class="row">
+          <% if (newsList && newsList.length > 0) { %>
+            <% newsList.forEach(function(item) { %>
+              <div class="col-lg-6">
+                <div class="position-relative mb-3">
+                  <img class="img-fluid w-100" src="<%= item.link_hinh_anh %>" style="object-fit: cover; height: 250px;" alt="<%= item.tieu_de %>" />
+                  
+                  <div class="bg-white border border-top-0 p-4">
+                    <div class="mb-2">
+                      <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2" href="/category/<%= item.id_danh_muc %>">
+                        <%= item.ten_danh_muc %>
+                      </a>
+                      <a class="text-body" href=""><small><%= new Date(item.ngay_dang).toLocaleDateString('vi-VN') %></small></a>
+                    </div>
+                    <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold" href="/single/<%= item.id %>" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                      <%= item.tieu_de %>
+                    </a>
+                    <p class="m-0" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                      <%= item.tom_tat %>
+                    </p>
+                  </div>
+                  
+                  <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
+                    <div class="d-flex align-items-center">
+                      <img class="rounded-circle mr-2" src="/client/images/user.jpg" width="25" height="25" alt="author" />
+                      <small><%= item.tac_gia %></small>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <small class="ml-3"><i class="far fa-eye mr-2"></i><%= item.luot_xem %></small>
+                      <small class="ml-3"><i class="far fa-comment mr-2"></i><%= item.so_luong_binh_luan %></small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% }); %>
+          <% } else { %>
+            <div class="col-12">
+              <div class="alert alert-warning text-center" role="alert">
+                Rất tiếc, không có bài viết nào khớp với từ khóa "<strong><%= keyword %></strong>". <br> Bạn thử tìm bằng một từ khóa khác xem sao nhé!
+              </div>
+            </div>
+          <% } %>
+        </div>
+
+        <% if (totalPages > 1) { %>
+          <div class="row mt-4 mb-5">
+            <div class="col-12">
+              <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center mb-0">
+                  
+                  <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
+                    <a class="page-link" href="/search?keyword=<%= keyword %>&page=<%= currentPage - 1 %>" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only">Trước</span>
+                    </a>
+                  </li>
+
+                  <% for(let i = 1; i <= totalPages; i++) { %>
+                    <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+                      <a class="page-link" href="/search?keyword=<%= keyword %>&page=<%= i %>"><%= i %></a>
+                    </li>
+                  <% } %>
+
+                  <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+                    <a class="page-link" href="/search?keyword=<%= keyword %>&page=<%= currentPage + 1 %>" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      <span class="sr-only">Sau</span>
+                    </a>
+                  </li>
+
+                </ul>
+              </nav>
+            </div>
+          </div>
+        <% } %>
+
+      </div>
+
+      <div class="col-lg-4">
+        <%- include('../partials/social') %>
+        <%- include('../partials/newsletter') %>
+        <%- include('../partials/trending-news') %>
+      </div>
+
+    </div>
+  </div>
+</div>

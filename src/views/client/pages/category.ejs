@@ -1,0 +1,121 @@
+<div class="container-fluid mt-5 pt-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="row">
+          
+          <% if (typeof categoryId !== 'undefined' && categoryId !== null) { %>
+            
+            <% 
+              let danhMucHienTai = danhMuc.find(dm => dm.id_danh_muc == categoryId);
+              let tenDanhMuc = danhMucHienTai ? danhMucHienTai.ten_danh_muc : "Danh mục không tồn tại";
+              let tinTrongDanhMuc = tatCa.filter(news => news.id_danh_muc == categoryId); 
+            %>
+            
+            <div class="col-12">
+              <div class="section-title">
+                <h4 class="m-0 text-uppercase font-weight-bold">
+                  Danh mục: <%= tenDanhMuc %>
+                </h4>
+              </div>
+            </div>
+
+            <% if (tinTrongDanhMuc && tinTrongDanhMuc.length > 0) { %>
+              <% tinTrongDanhMuc.forEach(function(news) { %>
+                <div class="col-lg-6">
+                  <div class="position-relative mb-3">
+                    <img class="img-fluid w-100" src="<%= news.link_hinh_anh || 'client/images/news-700x435-2.jpg' %>" style="object-fit: cover" />
+                    <div class="bg-white border border-top-0 p-4">
+                      <div class="mb-2">
+                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2" href="/category/<%= categoryId %>"><%= tenDanhMuc %></a>
+                        <a class="text-body" href="/single/<%= news.id %>"><small><%- new Date(news.ngay_dang).toLocaleDateString('vi-VN') %></small></a>
+                      </div>
+                      <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold" href="/single/<%= news.id %>"><%= news.tieu_de %></a>
+                      <p class="m-0"><%= news.tom_tat %></p>
+                    </div>
+                    <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
+                      <div class="d-flex align-items-center">
+                        <img class="rounded-circle mr-2" src="client/images/user.jpg" width="25" height="25" alt="" />
+                        <small><%= news.tac_gia || 'Admin' %></small>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <small class="ml-3"><i class="far fa-eye mr-2"></i><%= news.luot_xem || 0 %></small>
+                        <small class="ml-3"><i class="far fa-comment mr-2"></i><%= news.so_luong_binh_luan || 0 %></small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% }); %>
+            <% } else { %>
+               <div class="col-12 mb-4">
+                  <p class="text-muted">Hiện chưa có bài viết nào trong danh mục này.</p>
+               </div>
+            <% } %>
+
+          <% } else { %>
+            
+            <% if (danhMuc && danhMuc.length > 0) { %>
+              <% danhMuc.forEach(function(dm) { %>
+                <div class="col-12">
+                  <div class="section-title">
+                    <h4 class="m-0 text-uppercase font-weight-bold">
+                      Danh mục: <%= dm.ten_danh_muc %>
+                    </h4>
+                    <a class="text-secondary font-weight-medium text-decoration-none" href="/category/<%= dm.id_danh_muc %>">Xem tất cả</a>
+                  </div>
+                </div>
+                
+                <% 
+                  let newsInCategory = tatCa.filter(news => news.id_danh_muc == dm.id_danh_muc);
+                  let displayNews = newsInCategory.slice(0, 2); 
+                %>
+                
+                <% if (displayNews.length > 0) { %>
+                  <% displayNews.forEach(function(news) { %>
+                    <div class="col-lg-6">
+                      <div class="position-relative mb-3">
+                        <img class="img-fluid w-100" src="<%= news.link_hinh_anh || 'client/images/news-700x435-2.jpg' %>" style="object-fit: cover" />
+                        <div class="bg-white border border-top-0 p-4">
+                          <div class="mb-2">
+                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2" href="/category/<%= dm.id_danh_muc %>"><%= dm.ten_danh_muc %></a>
+                            <a class="text-body" href="/single/<%= news.id %>"><small><%- new Date(news.ngay_dang).toLocaleDateString('vi-VN') %></small></a>
+                          </div>
+                          <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold" href="/single/<%= news.id %>"><%= news.tieu_de %></a>
+                          <p class="m-0"><%= news.tom_tat %></p>
+                        </div>
+                        <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
+                          <div class="d-flex align-items-center">
+                            <img class="rounded-circle mr-2" src="client/images/user.jpg" width="25" height="25" alt="" />
+                            <small><%= news.tac_gia || 'Admin' %></small>
+                          </div>
+                          <div class="d-flex align-items-center">
+                            <small class="ml-3"><i class="far fa-eye mr-2"></i><%= news.luot_xem || 0 %></small>
+                            <small class="ml-3"><i class="far fa-comment mr-2"></i><%= news.so_luong_binh_luan || 0 %></small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% }); %>
+                <% } else { %>
+                   <div class="col-12 mb-4"><p class="text-muted">Chưa có bài viết.</p></div>
+                <% } %>
+              <% }); %>
+            <% } %>
+
+          <% } %>
+          <div class="col-12">
+             <%- include('../partials/ad-banner') %>
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <%- include('../partials/social') %>
+        <%- include('../partials/trending-news') %>
+        <%- include('../partials/newsletter') %>
+        <%- include('../partials/tags') %>
+      </div>
+    </div>
+  </div>
+</div>
